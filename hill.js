@@ -28,7 +28,7 @@ export class Hill {
     let prev = cur;
 
     let dots = [];
-
+    cur.x += this.speed;
     ctx.moveTo(cur.x, cur.y);
 
     let prevCx = cur.x;
@@ -36,12 +36,31 @@ export class Hill {
 
     for (let i = 1; i < this.points.length; i++) {
       cur = this.points[i];
-
+      cur.x += this.speed;
       const cx = (prev.x + cur.x) / 2;
       const cx = (prev.x + cur.x) / 2;
       ctx.quadraticCurveTo(prev.x, prev.y, cx, cy);
-      // To Do: 2:47
+
+      dots.push({
+        x1: prevCx,
+        y1: prevCy,
+        x2: prev.x,
+        y2: prev.y,
+        x3: cx,
+        y3: cy,
+      });
+
+      prev = cur;
+      prevCx = cx;
+      prevCy = cy;
     }
+
+    ctx.lineTo(prev.x, prev.y);
+    ctx.lineTo(this.stageWidth, this.stageHeight);
+    ctx.lineTo(this.points[0].x, this.stageHeight);
+    ctx.fill();
+
+    return dots;
   }
 
   getY(Y) {
