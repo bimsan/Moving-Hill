@@ -38,7 +38,7 @@ export class Hill {
       cur = this.points[i];
       cur.x += this.speed;
       const cx = (prev.x + cur.x) / 2;
-      const cx = (prev.x + cur.x) / 2;
+      const cy = (prev.y + cur.y) / 2;
       ctx.quadraticCurveTo(prev.x, prev.y, cx, cy);
 
       dots.push({
@@ -63,7 +63,7 @@ export class Hill {
     return dots;
   }
 
-  getY(Y) {
+  getY() {
     const min = this.stageHeight / 8;
     const max = this.stageHeight - min;
     return min + Math.random() * max;
